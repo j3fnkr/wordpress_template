@@ -58,11 +58,30 @@ services:
     networks:
       - backend
 
+  kopia:
+    profiles: ["backup"]
+    image: kopia/kopia:latest
+    hostname: wordpress-backup
+    volumes:
+      - kopia_data:/data
+      - kopia_config:/app/config
+      - kopia_cache:/app/cache
+      - kopia_logs:/app/logs
+      - wordpress:/backup/wordpress:ro
+      - db_data:/backup/db:ro
+      - caddy_data:/backup/caddy_data:ro
+      - caddy_config:/backup/caddy_config:ro
+    environment:
+      KOPIA_PASSWORD: ${KOPIA_PASSWORD}
 volumes:
   db_data: { }
   wordpress: { }
   caddy_data: { }
   caddy_config: { }
+  kopia_data: { }
+  kopia_config: { }
+  kopia_cache: { }
+  kopia_logs: { }
 
 networks:
     frontend: {}

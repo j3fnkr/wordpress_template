@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # subshell used to read .env to shell environment (so they are not set in the main shell)
 (
