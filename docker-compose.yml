@@ -58,6 +58,25 @@ services:
     networks:
       - backend
 
+  wpcli:
+    profiles: ["tools"]
+    image: wordpress:cli
+    user: "33:33"
+    volumes:
+      - wordpress:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - backend
+    depends_on:
+      - db
+      - wordpress
+    entrypoint: ["wp"]
+    working_dir: /var/www/html
+
   kopia:
     profiles: ["backup"]
     image: kopia/kopia:latest
