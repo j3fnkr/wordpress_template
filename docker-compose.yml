@@ -87,7 +87,7 @@ services:
       - kopia_cache:/app/cache
       - kopia_logs:/app/logs
       - wordpress:/backup/wordpress:ro
-      - db_data:/backup/db:ro
+      - db_dump:/backup/db:ro
       - caddy_data:/backup/caddy_data:ro
       - caddy_config:/backup/caddy_config:ro
     environment:
@@ -101,6 +101,7 @@ volumes:
   kopia_config: { }
   kopia_cache: { }
   kopia_logs: { }
+  db_dump: { }
 
 networks:
     frontend: {}

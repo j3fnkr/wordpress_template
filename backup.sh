@@ -20,6 +20,7 @@ fi
 COMPOSE=(docker compose --profile backup)
 KOPIA=( "${COMPOSE[@]}" run --rm -T kopia )
 
+# in place backups are created
 BACKUP_PATHS=(
   /backup/wordpress
   /backup/db
